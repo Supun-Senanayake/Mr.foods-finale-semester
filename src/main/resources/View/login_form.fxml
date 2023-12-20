@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="564.0" prefWidth="856.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.LoginFormController">
+   <children>
+      <AnchorPane layoutX="20.0" layoutY="18.0" prefHeight="518.0" prefWidth="850.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 78;">
+         <children>
+            <Pane layoutX="461.0" layoutY="49.0" prefHeight="45.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #FFCA40;">
+               <children>
+                  <Label layoutX="48.0" layoutY="6.0" prefHeight="34.0" prefWidth="239.0" text="Welcome Back ! ">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label fx:id="lbltime" layoutX="6.0" layoutY="432.0" prefHeight="31.0" prefWidth="157.0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Label>
+            <Pane layoutX="-10.0" layoutY="-5.0" prefHeight="533.0" prefWidth="491.0" style="-fx-background-color: black;">
+               <children>
+                  <ImageView fitHeight="521.0" fitWidth="446.0" layoutX="7.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assests/2150914727-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <TextField fx:id="txtusername" alignment="CENTER" layoutX="519.0" layoutY="238.0" prefHeight="25.0" prefWidth="203.0" promptText="User Name" style="-fx-background-color: white;" />
+            <Label layoutX="519.0" layoutY="155.0" prefHeight="56.0" prefWidth="203.0" text="Login Account ">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="543.0" layoutY="356.0" lineSpacing="998.0" onAction="#btnLoginOnAction" prefHeight="38.0" prefWidth="203.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 20;" text="LOGIN" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <PasswordField fx:id="btnpassword" alignment="CENTER" layoutX="539.0" layoutY="299.0" prefHeight="25.0" prefWidth="210.0" promptText="Password" style="-fx-background-color: white;" />
+      <Label fx:id="lbldate" layoutX="565.0" layoutY="424.0" prefHeight="18.0" prefWidth="125.0" />
+      <JFXButton fx:id="btncreateaccount" layoutX="591.0" layoutY="398.0" onAction="#btncreateaccountOnAction" prefHeight="5.0" prefWidth="112.0" text="Create Account ?" textFill="#e10000" underline="true" />
+   </children>
+</AnchorPane>

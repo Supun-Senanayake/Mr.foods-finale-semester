@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootnode" minHeight="777.0" minWidth="1320.0" prefHeight="777.0" prefWidth="1320.0" style="-fx-background-color: wite;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.DashboardFormController">
+   <children>
+      <AnchorPane fx:id="root" layoutX="188.0" pickOnBounds="false" prefHeight="783.0" prefWidth="1118.0">
+         <children>
+            <ImageView fitHeight="21.0" fitWidth="28.0" layoutX="-152.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assests/add-to-cart.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="24.0" fitWidth="21.0" layoutX="-148.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assests/raw-materials.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="763.0" fitWidth="1098.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="100.0" fitWidth="93.0" layoutX="978.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assests/pizza_1404996.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000c3" height="783.0" layoutX="-2.0" layoutY="-2.0" stroke="#e3c2f2" strokeType="INSIDE" width="195.0" />
+      <JFXButton fx:id="btnlogout" layoutX="13.0" layoutY="672.0" onAction="#btnlogoutOnAction" prefHeight="50.0" prefWidth="164.0" style="-fx-background-color: black; -fx-background-radius: 0;" text="LOG OUT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnprofile" buttonType="RAISED" layoutX="20.0" layoutY="594.0" onAction="#btnprofileOnAction" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 35;" text="Gmail" textAlignment="CENTER" textFill="#2c2424">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></JFXButton>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="44.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assests/email.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="Home" alignment="CENTER" buttonType="RAISED" layoutX="26.0" layoutY="172.0" lineSpacing="75.0" onAction="#btnHomeOnAction" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 30;" text="Home">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="Order" buttonType="RAISED" layoutX="25.0" layoutY="249.0" onAction="#btnOrderOnAction" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 30;" text="Order">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="Customer" buttonType="RAISED" layoutX="22.0" layoutY="466.0" onAction="#btnCustomerOnAction" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 30;" text="Customer">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="Item" buttonType="RAISED" layoutX="24.0" layoutY="321.0" onAction="#btnItemOnAction" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 30;" text="Item">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="Employee" buttonType="RAISED" layoutX="24.0" layoutY="395.0" onAction="#btnEmployeeOnAction" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 30;" text="Employee">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="Suppliers" layoutX="21.0" layoutY="532.0" onAction="#btnSuppliersOnAction" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 30;" text="Suppliers">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="47.0" layoutY="181.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Assests/home.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="15.0" fitWidth="21.0" layoutX="43.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assests/employees.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="15.0" fitWidth="21.0" layoutX="50.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assests/icum.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="156.0" fitWidth="164.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assests/logo-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="15.0" layoutX="42.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assests/user%20(3).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="64.0" layoutX="53.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assests/shopping-and-commerce.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="42.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assests/user%20(2).png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

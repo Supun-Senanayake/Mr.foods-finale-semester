@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" prefHeight="778.0" prefWidth="1104.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.HomePageController">
+   <children>
+      <Text layoutX="13.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashbord " wrappingWidth="213.671875">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Text>
+      <JFXComboBox fx:id="cmbMonth" layoutX="359.0" layoutY="119.0" onAction="#cmbMonthOnAction" prefHeight="26.0" prefWidth="153.0" />
+      <Label layoutX="15.0" layoutY="118.0" prefHeight="18.0" prefWidth="88.0" text="Year    :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtYear" layoutX="83.0" layoutY="114.0" prefHeight="26.0" prefWidth="163.0">
+         <font>
+            <Font size="20.0" />
+         </font></JFXTextField>
+      <Label layoutX="279.0" layoutY="120.0" text="Month   :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dateDate" layoutX="615.0" layoutY="125.0" />
+      <Label layoutX="552.0" layoutY="124.0" text="Date  :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="description" layoutX="319.0" layoutY="201.0" prefHeight="30.0" prefWidth="131.0" text="Description :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtDesc" layoutX="436.0" layoutY="187.0" prefHeight="26.0" prefWidth="147.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtAmount" layoutX="103.0" layoutY="180.0" prefHeight="26.0" prefWidth="167.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="18.0" layoutY="194.0" text="Amount :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="725.0" layoutY="247.0" text="Expenditure">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="583.0" layoutY="591.0" text="Expenditure Total  :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="41.0" layoutY="591.0" text="Income Total :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblIncomeTotal" layoutX="296.0" layoutY="591.0" prefHeight="30.0" prefWidth="166.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="354.0" layoutY="667.0" text="Final Income :">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnIncome" buttonType="RAISED" layoutX="655.0" layoutY="192.0" onAction="#btnIncomeOnAction" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #FFCA40;" text=" ADD INCOME" />
+      <TableView fx:id="tblExpenditure" layoutX="583.0" layoutY="285.0" prefHeight="301.0" prefWidth="490.0">
+         <columns>
+            <TableColumn fx:id="colExDate" prefWidth="143.20001220703125" text="Date" />
+            <TableColumn fx:id="colExDesc" prefWidth="154.39996337890625" text="Description" />
+            <TableColumn fx:id="colExAmount" prefWidth="192.00003662109373" text="Amount" />
+         </columns>
+      </TableView>
+      <JFXButton buttonType="RAISED" layoutX="970.0" layoutY="590.0" onAction="#btnSaveExOnAction" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #FFCA40;" text="save ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></JFXButton>
+      <Label fx:id="lblExpenditureTotal" layoutX="755.0" layoutY="591.0" prefHeight="18.0" prefWidth="158.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <JFXButton fx:id="btnchart" layoutX="907.0" layoutY="733.0" onAction="#btnchartOnAction" prefHeight="26.0" prefWidth="168.0" style="-fx-background-color: #5362ff; -fx-background-radius: 4 98;" text="View Chart" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </JFXButton>
+      <Line endX="16.0" endY="248.0" layoutX="519.0" layoutY="396.0" startX="16.0" startY="248.0" />
+      <AnchorPane layoutX="555.0" layoutY="238.0" prefHeight="531.0" prefWidth="529.0" style="-fx-background-color: white;">
+         <children>
+            <BarChart layoutX="35.0" layoutY="49.0" prefHeight="376.0" prefWidth="449.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff7621a8" height="268.0" layoutX="135.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff8521a8" height="291.0" layoutX="203.0" layoutY="108.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff8521a8" height="262.0" layoutX="265.0" layoutY="138.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff8521a8" height="291.0" layoutX="326.0" layoutY="109.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff8521a9" height="314.0" layoutX="386.0" layoutY="86.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="tblIncome" layoutX="17.0" layoutY="291.0" prefHeight="291.0" prefWidth="535.0">
+        <columns>
+          <TableColumn fx:id="collnDate" prefWidth="120.0" text="Date" />
+          <TableColumn fx:id="collnDesc" prefWidth="192.0" text="Description" />
+            <TableColumn fx:id="colonAmount" prefWidth="224.0" text="Amount" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblFinalIncome" layoutX="341.0" layoutY="669.0" prefHeight="30.0" prefWidth="305.0" style="-fx-background-color: white;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnExpenditure" buttonType="RAISED" layoutX="862.0" layoutY="189.0" onAction="#btnExpenditureOnAction" prefHeight="32.0" prefWidth="1.0" style="-fx-background-color: #FFCA40;" text="EXPENDITURE" />
+      <Pane layoutX="845.0" layoutY="32.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" />
+      <JFXButton buttonType="RAISED" layoutX="430.0" layoutY="597.0" onAction="#btnSaveInOnAction" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #FFCA40;" text="save ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
