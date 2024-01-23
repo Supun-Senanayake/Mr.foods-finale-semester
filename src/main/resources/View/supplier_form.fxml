@@ -35,7 +35,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="487.0" layoutY="697.0" onAction="#btnUpdateOnAction" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 15;" text="Update " viewOrder="45.0">
+      <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="464.0" layoutY="699.0" onAction="#btnUpdateOnAction" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 15;" text="Update " viewOrder="45.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -43,7 +43,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="601.0" layoutY="697.0" onAction="#btnDeleteOnAction" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="Delete" textFill="WHITE" viewOrder="45.0">
+      <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="578.0" layoutY="699.0" onAction="#btnDeleteOnAction" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="Delete" textFill="WHITE" viewOrder="45.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -51,7 +51,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnClear" buttonType="RAISED" layoutX="714.0" layoutY="696.0" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="Clear " textFill="#f8f8f8" viewOrder="45.0">
+      <JFXButton fx:id="btnClear" buttonType="RAISED" layoutX="692.0" layoutY="699.0" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="Clear " textFill="#f8f8f8" viewOrder="45.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -75,7 +75,7 @@
          <font>
             <Font size="20.0" />
          </font></JFXTextField>
-      <TableView fx:id="tblSupplier" layoutX="53.0" layoutY="398.0" prefHeight="293.0" prefWidth="755.0">
+      <TableView fx:id="tblSupplier" layoutX="53.0" layoutY="398.0" prefHeight="293.0" prefWidth="755.0" style="-fx-background-color: #FFCA40;" stylesheets="@style.css">
          <columns>
             <TableColumn fx:id="colId" prefWidth="128.80001544952393" text="Id" />
             <TableColumn fx:id="colName" prefWidth="163.19996643066406" text="Contact Number" />
@@ -85,8 +85,16 @@
       </TableView>
       <Text layoutX="21.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier Details" textAlignment="CENTER" wrappingWidth="309.936767578125">
          <font>
-            <Font name="Cambria Bold" size="36.0" />
+            <Font name="Cambria Bold" size="34.0" />
          </font>
       </Text>
+      <JFXButton buttonType="RAISED" layoutX="800.0" layoutY="699.0" onAction="#btnsuppliereportOnAction" prefHeight="26.0" prefWidth="170.0" style="-fx-background-color: green; -fx-background-radius: 15;" text="Get Suppiler Report " textFill="#f8f8f8" viewOrder="45.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

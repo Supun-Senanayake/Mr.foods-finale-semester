@@ -57,9 +57,6 @@ public class MailFormController {
 
         Thread thread = new Thread(mail);
         thread.start();
-
-        System.out.println("end");
-        txtStatus.setText("sended");
     }
 
     public static class Mail implements Runnable {
@@ -80,14 +77,14 @@ public class MailFormController {
         }
 
         public boolean outMail() throws MessagingException {
-            String from = "dlconstruction396@gmail.com"; //sender's email address
-            String host = "localhost";
+            String from = "ravindusupun0522@gmail.com"; //sender's email address
 
             Properties properties = new Properties();
             properties.put("mail.smtp.auth", "true");
             properties.put("mail.smtp.starttls.enable", "true");
             properties.put("mail.smtp.host", "smtp.gmail.com");
-            properties.put("mail.smtp.port", 587);
+            properties.put("mail.smtp.port", "587");
+
             Session session = Session.getInstance(properties, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication("dlconstruction396@gmail.com", "lysz sxzs eltm eqhw");  // email and password
@@ -106,12 +103,26 @@ public class MailFormController {
         public void run() {
             if (msg != null) {
                 try {
-                    outMail();
+                    if (outMail()) {
+                        System.out.println("Mail sent successfully!");
+                        // Update the UI to show successful delivery
+                        // You might want to use Platform.runLater() if updating UI from a non-JavaFX thread
+                        // txtStatus.setText("Mail sent successfully!");
+                    } else {
+                        System.out.println("Mail not sent!");
+                        // Update the UI to show failed delivery
+                        // txtStatus.setText("Mail not sent!");
+                    }
                 } catch (MessagingException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace(); // Print the error for debugging
+                    System.out.println("Failed to send mail: " + e.getMessage());
+                    // Update the UI to show an error message
+                    // txtStatus.setText("Failed to send mail: " + e.getMessage());
                 }
             } else {
-                System.out.println("not sent. empty msg!");
+                System.out.println("Mail not sent. Empty message!");
+                // Update the UI to show empty message error
+                // txtStatus.setText("Mail not sent. Empty message!");
             }
         }
     }

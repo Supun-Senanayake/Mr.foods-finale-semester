@@ -20,14 +20,14 @@ public class CustomerModel {
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         ResultSet resultSet = pstm.executeQuery();
-        if(resultSet.next()) {
+        if (resultSet.next()) {
             return splitCustomerId(resultSet.getString(1));
         }
         return splitCustomerId(null);
     }
 
     private static String splitCustomerId(String currentCustomrerId) {
-        if(currentCustomrerId != null) {
+        if (currentCustomrerId != null) {
             String[] split = currentCustomrerId.split("C0");
 
             int id = Integer.parseInt(split[1]); //01
@@ -37,6 +37,7 @@ public class CustomerModel {
             return "C001";
         }
     }
+
 
     public boolean saveCustomer(CustomerDto dto) throws SQLException, ClassNotFoundException {
 
@@ -56,7 +57,6 @@ public class CustomerModel {
         pstm.setString(2, dto.getAddress());
         pstm.setString(3, dto.getTel());
         pstm.setString(4, dto.getId());
-
 
 
         return pstm.executeUpdate() > 0;
@@ -82,7 +82,7 @@ public class CustomerModel {
 
         ArrayList<CustomerDto> dtoList = new ArrayList<>();
 
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             dtoList.add(
                     new CustomerDto(
                             resultSet.getString(1),
@@ -97,7 +97,7 @@ public class CustomerModel {
         return dtoList;
     }
 
-    public CustomerDto searchCustomer(String id) throws SQLException {
+    /*public static CustomerDto searchCustomer(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection ();
 
         String sql = "SELECT * FROM customer WHERE customer_id = ?";
@@ -127,6 +127,53 @@ public class CustomerModel {
            // dto = new CustomerDto(cus_id,cus_name,cus_address,cus_tel);
         }
         return dto;
-    }
-}
+    }*/
 
+    public String generateNextcustomerContactNo() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT contact_number FROM customer ORDER BY contact_Number DESC LIMIT 4";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            return splitCustomerId(resultSet.getString(4));
+        }
+        return splitCustomerId(null);
+
+    }
+
+
+    public static CustomerDto searchCustomer(String contact) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM customer WHERE contact_Number = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, contact);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        CustomerDto dto = null;
+
+
+        if (resultSet.next()) {
+
+            dto = new CustomerDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+
+            );
+//            String cus_id = resultSet.getString(1);
+//            String cus_name = resultSet.getString(2);
+//            String cus_address = resultSet.getString(3);
+//            String cus_tel = resultSet.getString(4);
+
+
+            // dto = new CustomerDto(cus_id,cus_name,cus_address,cus_tel);
+        }
+        return dto;
+    }
+
+}

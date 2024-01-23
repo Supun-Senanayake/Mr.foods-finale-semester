@@ -12,11 +12,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.DB.DbConnection;
 import lk.ijse.Model.SupplierModel;
 import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.tm.SupplierTm;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.controlsfx.control.Notifications;
 
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -71,9 +77,24 @@ public class SupplierFormController {
     private SupplierModel supplierModel = new SupplierModel();
 
     public void initialize() {
-       generateNextSupplierId();
+        generateNextSupplierId();
         setCellValueFactory();
         loadAllSupplier();
+        tableListener();
+    }
+
+    private void tableListener() {
+        tblSupplier.getSelectionModel().selectedItemProperty().addListener((observable, oldValued, newValue) -> {
+//            System.out.println(newValue);
+            setData(newValue);
+        });
+    }
+
+    private void setData(SupplierTm row) {
+        txtsupplierId.setText(row.getId());
+        txtsupplierrname.setText(row.getName());
+        txtdes.setText(row.getDescription());
+        txtcontactnumber.setText(row.getTel());
     }
 
     private void generateNextSupplierId() {
@@ -87,12 +108,12 @@ public class SupplierFormController {
 
     private boolean validateSupplier() {
         boolean isValidate = true;
-        boolean name = Pattern.matches("[A-Za-z]{5,}", txtsupplierrname.getText());
+        boolean name = Pattern.matches("[A-Za-z]{3,}", txtsupplierrname.getText());
         if (!name){
             showErrorNotification("Invalid supplier Name", "The supplier name you entered is invalid");
             isValidate = false;
         }
-        boolean des = Pattern.matches("[A-Za-z]{5,}",txtdes.getText());
+        boolean des = Pattern.matches("[A-Za-z]{1,}",txtdes.getText());
         if(!des){
             showErrorNotification("invalid description","The description you entered is invalid");
             isValidate = false;
@@ -142,11 +163,10 @@ public class SupplierFormController {
 
     private void setCellValueFactory() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        coltel.setCellValueFactory(new PropertyValueFactory<>("tel"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        coltel.setCellValueFactory(new PropertyValueFactory<>("tel"));
         coldescription.setCellValueFactory(new PropertyValueFactory<>("description"));
     }
-
 
 
 
@@ -158,7 +178,6 @@ public class SupplierFormController {
 
         var dto = new SupplierDto(id,tel,name,descrption);
 
-
         try {
             if (!validateSupplier()){
                 return;
@@ -167,6 +186,7 @@ public class SupplierFormController {
 
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "supplier saved!").show();
+                loadAllSupplier();
                 initialize();
                 clearFields();
             }
@@ -176,7 +196,6 @@ public class SupplierFormController {
             e.printStackTrace();
         }
         new Alert(Alert.AlertType.INFORMATION, "ID no not validate");
-
 
     }
 
@@ -201,6 +220,7 @@ public class SupplierFormController {
             boolean isUpdated = supplierModel.updateSupplier(dto);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Supplier updated!").show();
+                loadAllSupplier();
                 clearFields();
             }
         } catch (SQLException e) {
@@ -215,6 +235,8 @@ public class SupplierFormController {
             boolean isDeleted = supplierModel.deleteSupplier(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Supplier deleted!").show();
+                loadAllSupplier();
+
             } else {
                 new Alert(Alert.AlertType.CONFIRMATION, "Supplier not deleted!").show();
             }
@@ -249,5 +271,18 @@ public class SupplierFormController {
         }
     }
 
+    @FXML
+    void btnsuppliereportOnAction(ActionEvent event) throws JRException, SQLException {
+        InputStream resourceAsStream = getClass().getResourceAsStream("/report/Suppierreport.jrxml");
+        JasperDesign load = JRXmlLoader.load(resourceAsStream);
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(
+                jasperReport,
+                null,
+                DbConnection.getInstance().getConnection()
+        );
+        JasperViewer.viewReport(jasperPrint, false);
     }
+}
 

@@ -20,13 +20,14 @@ public class PlaceOrderModel {
         String orderId = placeOrderDto.getOrderId();
         String customerId = placeOrderDto.getCustomerId();
         LocalDate date = placeOrderDto.getDate();
+        String netTotal = placeOrderDto.getTotalprice();
 
         Connection connection = null;
         try {
             connection = DbConnection.getInstance().getConnection();
             connection.setAutoCommit(false);
 
-            boolean isOrderSaved = orderModel.saveOrder(orderId, customerId, date);
+            boolean isOrderSaved = orderModel.saveOrder(orderId, customerId, date, netTotal);
             if (isOrderSaved) {
                 System.out.println("1 "+isOrderSaved);
                 boolean isUpdated = itemModel.updateItem(placeOrderDto.getCartTmList());

@@ -15,7 +15,7 @@ import java.util.List;
 public class SupplierModel {
     public static boolean saveSupplier(SupplierDto dto)throws SQLException, ClassNotFoundException  {
         boolean execute = CrudUtil.execute("INSERT INTO supplier VALUES(?, ?, ?, ?)",
-                dto.getId(), dto.getTel(),dto. getName(),dto.getDescription());
+                dto.getId(),dto. getName(), dto.getTel(),dto.getDescription());
         return execute;
     }
 

@@ -12,12 +12,11 @@ public class RegisterModel {
         Connection connection = DbConnection.getInstance().getConnection();
 
 
-        String sql = "INSERT INTO user VALUES(?,?,?)";
+        String sql = "INSERT INTO user VALUES(?,?)";
         PreparedStatement ptm = connection.prepareStatement(sql);
 
-        ptm.setString(1, dto.getUserId());
-        ptm.setString(2, dto.getUsername());
-        ptm.setString(3, dto.getPassword());
+        ptm.setString(1, dto.getUsername());
+        ptm.setString(2, dto.getPassword());
 
         return ptm.executeUpdate() > 0;
     }

@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.DB.DbConnection;
 import lk.ijse.Model.CustomerModel;
 import lk.ijse.Model.ItemModel;
 import lk.ijse.Model.OrderModel;
@@ -23,6 +24,7 @@ import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.PlaceOrderDto;
 import lk.ijse.dto.billDto;
 import lk.ijse.dto.tm.CartTm;
+import lk.ijse.dto.tm.CustomerTm;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -45,6 +47,10 @@ public class OrdersFormController {
     public Label lblqtynHand;
     public Label lblqty;
     public Label lblnettotal;
+    public JFXButton btnnercustomer;
+    public JFXComboBox cmbcusnumid;
+    public TextField txtContactNo;
+    public TextField txtContactNumber;
     @FXML
     private JFXComboBox<String> cmbCustomerId;
 
@@ -120,6 +126,7 @@ public class OrdersFormController {
         }
     }
 
+
     private void loadItemCodes() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
@@ -166,23 +173,7 @@ public class OrdersFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
-        }
-
-    public void cmbCustomerIOnAction(ActionEvent actionEvent) {
-        String id = cmbCustomerId.getValue();
-
-        try {
-            CustomerDto customerDto = customerModel.searchCustomer(id);
-            lblcustomerName.setText(customerDto.getName());
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
-
-
 
     public void btnAddToCartOnAction(ActionEvent actionEvent) {
         String code = cmbItemCode.getValue();
@@ -238,18 +229,20 @@ public class OrdersFormController {
         });
     }
 
-    private void calculateTotal() {
+    private String calculateTotal() {
         double total = 0;
         for (int i = 0; i < tblOrder.getItems().size(); i++) {
             total += (double) coltotal.getCellData(i);
         }
         lblnettotal.setText(String.valueOf(total));
+        return null;
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) throws JRException {
         String orderId = lblorderId.getText();
         LocalDate date = LocalDate.parse(lblDate.getText());
         String customerId = cmbCustomerId.getValue();
+        String totalprice = lblnettotal.getText();
 
         List<CartTm> cartTmList = new ArrayList<>();
         for (int i = 0; i < tblOrder.getItems().size(); i++) {
@@ -259,11 +252,12 @@ public class OrdersFormController {
         }
 
         System.out.println("Place order form controller: " + cartTmList);
-        var placeOrderDto = new PlaceOrderDto(orderId, date, customerId, cartTmList);
+        var placeOrderDto = new PlaceOrderDto(orderId, date, customerId, totalprice, cartTmList);
         try {
             boolean isSuccess = placeOrderModel.placeOrder(placeOrderDto);
             if (isSuccess) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Success!").show();
+                printBill();
             }else{
                 new Alert(Alert.AlertType.ERROR,"Order failed").show();
             }
@@ -281,33 +275,23 @@ public class OrdersFormController {
             ));
 
         }
-        
-        printBill(bill,lblorderId.getText(),Double.parseDouble(lblnettotal.getText()));
 
     }
 
-    private void printBill(ArrayList<billDto> bill, String id, double total) throws JRException {
-            JRBeanCollectionDataSource billData = new JRBeanCollectionDataSource(bill);
-
-            Map<String, Object> map = new HashMap<>();
-            map.put("collection",billData);
-            map.put("Total",total);
-            map.put("id",id);
-
-            InputStream resourceAsStream =  getClass().getResourceAsStream("/report/bill.jrxml");
-
+    private void printBill() throws JRException, SQLException {
+        InputStream resourceAsStream = getClass().getResourceAsStream("/report/Invoice.jrxml");
         JasperDesign load = JRXmlLoader.load(resourceAsStream);
-            JasperReport jasperReport= JasperCompileManager.compileReport(load);
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(
-                    jasperReport,
-                    map,
-                    new JREmptyDataSource()
-            );
-
-            JasperViewer.viewReport(jasperPrint,false);
-
+        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(
+                jasperReport,
+                null,
+                DbConnection.getInstance().getConnection()
+        );
+        JasperViewer.viewReport(jasperPrint, false);
     }
+
+
 
     public void txtQtyOnAction(ActionEvent actionEvent) {
         btnAddToCartOnAction(actionEvent);
@@ -329,4 +313,61 @@ public class OrdersFormController {
         stage.setScene(new Scene(anchorPane));
         stage.centerOnScreen();
     }
+
+    public void cmbcusnumAction(ActionEvent actionEvent) {
+    }
+
+    public void cmbCustomeridOnAction(ActionEvent actionEvent) {
+    }
+
+    public void cmbCustomeridAction(ActionEvent actionEvent) {
+        String id = cmbCustomerId.getValue();
+
+        try {
+            CustomerDto dto = CustomerModel.searchCustomer(id);
+            lblcustomerName.setText(dto.getName());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void btnSearchOnAction(ActionEvent actionEvent) {
+            String txtContactNoText = txtContactNo.getText();
+            try {
+                CustomerDto dto = CustomerModel.searchCustomer(txtContactNoText);
+                lblcustomerName.setText(dto.getName());
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+    }
+
+    private void fillData(CustomerDto customer) {
+        txtContactNo.setText(customer.getTel());
+    }
 }
+
+
+
+   /* public void txtQtyOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnbackOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnnercustomerOnAction(ActionEvent actionEvent) {
+    }
+
+    public void cmbCustomeridOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnAddToCartOnAction(ActionEvent actionEvent) {
+    }
+
+    public void cmbcusnumAction(ActionEvent actionEvent) {
+    }*/

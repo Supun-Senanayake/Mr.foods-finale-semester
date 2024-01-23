@@ -34,11 +34,10 @@ public class RegisterFormController {
 
     public void btnregisterOnAction(ActionEvent actionEvent) throws IOException, SQLException {
 
-        String userId = generateNextUserId();
         String name = txtusername.getText();
         String password = txtpassword.getText();
 
-        var dto = new UserDto(userId, name, password);
+        var dto = new UserDto(name, password);
 
         try {
             boolean isRegister = RegisterModel.registerAdmin(dto);
@@ -55,10 +54,6 @@ public class RegisterFormController {
 //        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/login_form.fxml")));
 
 
-    }
-
-    private String generateNextUserId() throws SQLException {
-        return UserModel.getNextUserId();
     }
 
     private void clearField() {

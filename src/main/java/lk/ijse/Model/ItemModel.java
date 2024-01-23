@@ -18,9 +18,9 @@ public class ItemModel {
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, dto.getCode());
-        pstm.setString(2, dto.getQtyOnHand());
+        pstm.setString(2, dto.getDescription());
         pstm.setDouble(3, dto.getUnitPrice());
-        pstm.setString(4, dto.getDescription());
+        pstm.setString(4, dto.getQtyOnHand());
 
         return pstm.executeUpdate() > 0;
     }
@@ -109,6 +109,7 @@ public class ItemModel {
 
         String sql = "UPDATE item SET description = ?, unit_price = ?, qty_on_hand = ? WHERE item_code = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
+
 
         pstm.setString(1, itemDto.getDescription());
         pstm.setDouble(2, itemDto.getUnitPrice());

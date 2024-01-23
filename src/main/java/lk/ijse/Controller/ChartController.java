@@ -62,6 +62,8 @@ public class ChartController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
 
+        }finally {
+
         }
     }
 

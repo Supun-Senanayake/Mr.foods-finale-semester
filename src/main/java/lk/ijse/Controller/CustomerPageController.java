@@ -3,6 +3,8 @@ package lk.ijse.Controller;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.DB.DbConnection;
 import lk.ijse.Model.CustomerModel;
 import lk.ijse.Model.EmployeeModel;
 import lk.ijse.dto.CustomerDto;
@@ -34,6 +37,7 @@ import java.util.regex.Pattern;
 
 public class CustomerPageController {
     public AnchorPane root;
+    public JFXTextField serchCustomer;
 
 
     @FXML
@@ -63,6 +67,8 @@ public class CustomerPageController {
         generateNextCustomerId();
         setCellValueFactory();
         loadAllCustomer();
+        tableListener();
+        itemSerachOnAction();
     }
 
     private void setCellValueFactory() {
@@ -80,6 +86,29 @@ public class CustomerPageController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+    private  void genarateNextCustomerContact(){
+        try{
+            String ContactNo = customerModel.generateNextcustomerContactNo();
+            txtContactNo.setText(ContactNo);
+        } catch (SQLException e){
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void tableListener() {
+        tblCustomer.getSelectionModel().selectedItemProperty().addListener((observable, oldValued, newValue) -> {
+//            System.out.println(newValue);
+            setData(newValue);
+        });
+    }
+
+    private void setData(CustomerTm row) {
+        txtid.setText(row.getId());
+        txtName.setText(row.getName());
+        txtContactNo.setText(row.getTel());
+        txtAddress.setText(row.getAddress());
+    }
+
     private void loadAllCustomer() {
         var model = new CustomerModel();
 
@@ -302,4 +331,41 @@ public class CustomerPageController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+
+    public void btncustomerreportOnAction(ActionEvent actionEvent) throws JRException, SQLException {
+        InputStream resourceAsStream = getClass().getResourceAsStream("/report/Customer.jrxml");
+        JasperDesign load = JRXmlLoader.load(resourceAsStream);
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(
+                jasperReport,
+                null,
+                DbConnection.getInstance().getConnection()
+        );
+        JasperViewer.viewReport(jasperPrint, false);
+
+    }
+
+    public void itemSerachOnAction() {
+        FilteredList<CustomerTm> filteredData = new FilteredList<>(tblCustomer.getItems(), b -> true);
+        serchCustomer.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(item -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String serchKey = newValue.toLowerCase();
+
+                if (item.getTel().toString().contains(serchKey)) {
+                    return true;
+                } else if (item.getId().toLowerCase().contains(serchKey)) {
+                    return true;
+                } else return false;
+            });
+        });
+
+        SortedList<CustomerTm> sortedList = new SortedList<>(filteredData);
+        sortedList.comparatorProperty().bind(tblCustomer.comparatorProperty());
+        tblCustomer.setItems(sortedList);
+    }
+
 }

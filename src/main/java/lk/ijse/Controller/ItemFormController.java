@@ -1,5 +1,6 @@
 package lk.ijse.Controller;
 
+import com.google.zxing.WriterException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -110,12 +111,16 @@ public class ItemFormController {
     }
 
 
+
    
 
     private void loadAllItems() {
-//        var model = new ItemModel();
+        var model = new ItemModel();
+
+        ObservableList <ItemTm> obList = FXCollections.observableArrayList();
+
         try {
-            List<ItemDto> dtoList = itemModel.loadAllItems();
+            List<ItemDto> dtoList = model.loadAllItems();
 
             for (ItemDto dto : dtoList) {
                 Button btndelete = new Button("Delete");
@@ -157,14 +162,14 @@ public class ItemFormController {
             boolean isDeleted = ItemModel.deleteItem(employeeId);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Item deleted!").show();
-                initialize();
+                clearFields();
+                loadAllItems();
             } else {
                 new Alert(Alert.AlertType.CONFIRMATION, "Item not deleted!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-        tblItem.refresh();
     }
 
     private void clearFields() {
@@ -187,19 +192,21 @@ public class ItemFormController {
         double unitPrice = Double.parseDouble(txtprice.getText());
         int qtyOnHand = Integer.parseInt(txtqty.getText());
 
-        var dto = new ItemDto(code, description, unitPrice, qtyOnHand+"");
+
 
 //        var model = new ItemModel();
         try {
             if (!validateItem()){
                 return;
             }
+
+            var dto = new ItemDto(code, description, unitPrice, qtyOnHand+"");
             boolean isSaved = itemModel.saveItem(dto);
 
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Item saved!").show();
-                initialize();
                 clearFields();
+                loadAllItems();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -243,6 +250,8 @@ public class ItemFormController {
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "item updated").show();
                 initialize();
+                clearFields();
+                loadAllItems();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -256,7 +265,8 @@ public class ItemFormController {
             boolean isDeleted = itemModel.deleteItem(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Item deleted!").show();
-                initialize();
+                clearFields();
+                loadAllItems();
             } else {
                 new Alert(Alert.AlertType.CONFIRMATION, "Item not deleted!").show();
             }
@@ -268,6 +278,7 @@ public class ItemFormController {
 
     public void btnclearOnAction(ActionEvent actionEvent) {
         clearFields();
+        generateNextItemCode();
     }
 
     public void itemseachONAction(ActionEvent actionEvent) {
@@ -283,6 +294,21 @@ public class ItemFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public void getQr(ActionEvent actionEvent) throws WriterException {
+
+        String values =txtcode.getText() + "," + txtdescription.getText() + "," + txtprice + "," + txtqty.getText() ;//QR code ekata watenna oone details tika..
+
+        String filepath = "C:\\Users\\S\\Desktop\\Qr"+ txtcode.getText() +".png"; //Save wenna oone folder eke path eka..
+        boolean isGenerated = QR.generateQrCode(values, 1250, 1250, filepath);
+
+        if (isGenerated){
+            new Alert(Alert.AlertType.CONFIRMATION, "Generated QR Code ITEM DETAILS").show();
+        } else {
+            new Alert(Alert.AlertType.WARNING, "Try Again").show();;
+        }
+
     }
 }
 

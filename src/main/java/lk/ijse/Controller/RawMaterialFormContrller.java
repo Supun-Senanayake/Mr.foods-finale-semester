@@ -75,6 +75,7 @@ public class RawMaterialFormContrller {
         setCellValueFactory();
         loadAllRawMaterial();
         tableListener();
+
     }
 
     private void generateNextRawMaterialCode() {

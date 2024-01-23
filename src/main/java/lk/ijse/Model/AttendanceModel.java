@@ -17,6 +17,7 @@ public class AttendanceModel {
 
         String sql = "INSERT INTO attendance  (date,name,employee_id) VALUES(?,?,?)";
 
+
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, dto.getDate());
         pstm.setString(2, dto.getId());

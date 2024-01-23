@@ -37,7 +37,7 @@ public class LoginFormController {
 
     public LoginFormController() {
         String password = null;
-        userDto = new UserDto(null,name, password);
+        userDto = new UserDto(name, password);
     }
 
     public void initialize() {

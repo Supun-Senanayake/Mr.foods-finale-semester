@@ -13,8 +13,4 @@ public class ItemDto {
     private double unitPrice;
     private String qtyOnHand;
 
-
-    public ItemDto(String string, String string1) {
-
-    }
 }

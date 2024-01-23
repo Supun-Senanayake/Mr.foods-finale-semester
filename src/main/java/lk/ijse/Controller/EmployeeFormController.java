@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.DB.DbConnection;
 import lk.ijse.Model.CustomerModel;
 import lk.ijse.Model.EmployeeModel;
 import lk.ijse.dto.CustomerDto;
@@ -21,9 +22,14 @@ import lk.ijse.dto.EmployeeDto;
 import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.dto.tm.EmployeeTm;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -115,6 +121,8 @@ public class EmployeeFormController {
     private void loadAllEmployeeDetails() {
         var model = new EmployeeModel();
 
+        ObservableList <EmployeeTm> obList = FXCollections.observableArrayList();
+
         try {
             List<EmployeeDto> dtoList = model.getAllEmployee();
 
@@ -186,7 +194,7 @@ public class EmployeeFormController {
 
     private boolean validateEmployee() {
         boolean isValidate = true;
-        boolean name = Pattern.matches("[A-Za-z]{5,}", txtname.getText());
+        boolean name = Pattern.matches("[A-Za-z]{3,}", txtname.getText());
         if (!name){
             showErrorNotification("Invalid Employee Name", "The Employee name you entered is invalid");
             isValidate = false;
@@ -218,7 +226,6 @@ public class EmployeeFormController {
         String address = txtaddress.getText();
         String tel = txttel.getText();
 
-        var dto1 = new EmployeeDto(id, name, address, tel);
         try {
             if (!validateEmployee()){
                 return;
@@ -248,6 +255,7 @@ public class EmployeeFormController {
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "employee deleted!").show();
                 initialize();
+                loadAllEmployeeDetails();
             } else {
                 new Alert(Alert.AlertType.CONFIRMATION, "employee not deleted!").show();
             }
@@ -275,6 +283,20 @@ public class EmployeeFormController {
 
         stage.setScene(new Scene(anchorPane));
         stage.centerOnScreen();
+    }
+
+    @FXML
+    void btnreportOnAction(ActionEvent event) throws SQLException, JRException {
+        InputStream resourceAsStream = getClass().getResourceAsStream("/report/Employereport.jrxml");
+        JasperDesign load = JRXmlLoader.load(resourceAsStream);
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(
+                jasperReport,
+                null,
+                DbConnection.getInstance().getConnection()
+        );
+        JasperViewer.viewReport(jasperPrint, false);
     }
 
 }

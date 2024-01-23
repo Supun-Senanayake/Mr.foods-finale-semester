@@ -12,11 +12,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="778.0" prefWidth="1104.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.EmployeeFormController">
+<AnchorPane fx:id="root" prefHeight="778.0" prefWidth="1104.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.EmployeeFormController">
    <children>
+      <TableView fx:id="tblemployee" layoutX="207.0" layoutY="356.0" prefHeight="323.0" prefWidth="786.0" stylesheets="@style.css">
+        <columns>
+          <TableColumn fx:id="colid" prefWidth="165.86669540405273" text="Id" />
+          <TableColumn fx:id="colname" prefWidth="150.13330841064453" text="Name" />
+            <TableColumn fx:id="coladdress" prefWidth="230.0" text="Address" />
+            <TableColumn fx:id="coltel" prefWidth="238.0" text="Contact Number" />
+        </columns>
+      </TableView>
       <Text fill="#24251d" layoutX="10.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee Details" textAlignment="CENTER" wrappingWidth="311.73681640625">
          <font>
-            <Font name="Cambria Bold" size="36.0" />
+            <Font name="Cambria Bold" size="31.0" />
          </font>
       </Text>
       <Text layoutX="46.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee Id        :">
@@ -59,15 +67,7 @@
             <Font size="20.0" />
          </font>
       </JFXTextField>
-      <TableView fx:id="tblemployee" layoutX="27.0" layoutY="336.0" prefHeight="323.0" prefWidth="786.0">
-        <columns>
-          <TableColumn fx:id="colid" prefWidth="165.86669540405273" text="Id" />
-          <TableColumn fx:id="colname" prefWidth="150.13330841064453" text="Name" />
-            <TableColumn fx:id="coladdress" prefWidth="230.0" text="Address" />
-            <TableColumn fx:id="coltel" prefWidth="238.0" text="Contact Number" />
-        </columns>
-      </TableView>
-      <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="498.0" layoutY="291.0" onAction="#btnSaveOnAction" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 10;" text="Save" viewOrder="45.0">
+      <JFXButton id="imgHome" fx:id="btnSave" buttonType="RAISED" layoutX="498.0" layoutY="291.0" onAction="#btnSaveOnAction" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: #FFCA40;" stylesheets="@style.css" text="Save" textFill="#030303" viewOrder="45.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -105,5 +105,10 @@
             <Font size="15.0" />
          </font>
       </Label>
+      <JFXButton buttonType="RAISED" layoutX="774.0" layoutY="667.0" lineSpacing="876.0" onAction="#btnreportOnAction" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: green; -fx-background-radius: 15;" text="Get Employee Report " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

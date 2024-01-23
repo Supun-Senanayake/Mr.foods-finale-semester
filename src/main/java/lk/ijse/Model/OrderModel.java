@@ -39,16 +39,23 @@ public class OrderModel {
         return "O001";
 }
 
-    public boolean saveOrder(String orderId, String customerId, LocalDate date) throws SQLException {
+    public boolean saveOrder(String orderId, String customerId, LocalDate date ,String netTotal) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO orders VALUES(?, ?, ?)";
+        String sql = "INSERT INTO orders VALUES(?, ?, ?, ?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, orderId);
-        pstm.setString(3, customerId);
         pstm.setDate(2, Date.valueOf(date));
+        pstm.setString(3, customerId);
+        pstm.setDouble(4, Double.parseDouble(netTotal));
 
         return pstm.executeUpdate() > 0;
     }
+
+    public String getincome() {
+        return null;
+    }
 }
+
+
 

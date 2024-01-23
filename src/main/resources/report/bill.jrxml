@@ -87,9 +87,9 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="71" splitType="Stretch">
+		<band height="100" splitType="Stretch">
 			<componentElement>
-				<reportElement x="0" y="0" width="550" height="70" uuid="ea3523e6-762f-4906-88e2-d2c11e5327a5">
+				<reportElement x="39" y="10" width="511" height="90" uuid="ea3523e6-762f-4906-88e2-d2c11e5327a5">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>

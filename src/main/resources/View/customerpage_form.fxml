@@ -10,9 +10,9 @@
 
 <AnchorPane fx:id="root" prefHeight="770.0" prefWidth="1118.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.Controller.CustomerPageController">
    <children>
-      <Text layoutX="16.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Customer" textAlignment="CENTER" wrappingWidth="302.9366455078125">
+      <Text layoutX="2.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Customer" textAlignment="CENTER" wrappingWidth="302.9366455078125">
          <font>
-            <Font name="Cambria Bold" size="36.0" />
+            <Font name="Cambria Bold" size="30.0" />
          </font>
       </Text>
       <Text layoutX="24.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer  Id       :" AnchorPane.leftAnchor="24.0">
@@ -47,7 +47,7 @@
          <font>
             <Font size="20.0" />
          </font></JFXTextField>
-      <TableView fx:id="tblCustomer" layoutX="17.0" layoutY="311.0" prefHeight="339.0" prefWidth="905.0" style="-fx-background-image: #f5f6fa;">
+      <TableView fx:id="tblCustomer" layoutX="17.0" layoutY="311.0" prefHeight="339.0" prefWidth="905.0" style="-fx-background-image: #FFCA40;" stylesheets="@style.css">
          <columns>
             <TableColumn fx:id="colId" prefWidth="152.79992866516113" text="Id" />
             <TableColumn fx:id="colCusName" prefWidth="183.4666290283203" text="Customer  Name" />
@@ -60,17 +60,17 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnupdate" buttonType="RAISED" layoutX="622.0" layoutY="655.0" lineSpacing="876.0" onAction="#btnupdateOnAction" prefHeight="27.0" prefWidth="94.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 15;" text="Update">
+      <JFXButton fx:id="btnupdate" buttonType="RAISED" layoutX="602.0" layoutY="663.0" lineSpacing="876.0" onAction="#btnupdateOnAction" prefHeight="27.0" prefWidth="94.0" style="-fx-background-color: #FFCA40; -fx-background-radius: 15;" text="Update">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btndelete" buttonType="RAISED" layoutX="730.0" layoutY="655.0" lineSpacing="876.0" onAction="#btndeleteOnAction" prefHeight="27.0" prefWidth="94.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="Delete" textFill="WHITE">
+      <JFXButton fx:id="btndelete" buttonType="RAISED" layoutX="716.0" layoutY="663.0" lineSpacing="876.0" onAction="#btndeleteOnAction" prefHeight="27.0" prefWidth="94.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnclear" buttonType="RAISED" layoutX="833.0" layoutY="655.0" lineSpacing="876.0" onAction="#btnclearOnAction" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="Clear " textFill="WHITE">
+      <JFXButton fx:id="btnclear" buttonType="RAISED" layoutX="824.0" layoutY="662.0" lineSpacing="876.0" onAction="#btnclearOnAction" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: red; -fx-background-radius: 15;" text="Clear " textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -80,5 +80,11 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="940.0" layoutY="660.0" lineSpacing="876.0" onAction="#btncustomerreportOnAction" prefHeight="27.0" prefWidth="165.0" style="-fx-background-color: green; -fx-background-radius: 15;" text="Get Customer Report" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="serchCustomer" alignment="CENTER" layoutX="595.0" layoutY="46.0" prefHeight="25.0" prefWidth="327.0" promptText="Search Customer " />
    </children>
 </AnchorPane>
